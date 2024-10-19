@@ -1,0 +1,12 @@
+{
+  "type": "module",
+  "devDependencies": {
+    "@cucumber/cucumber": "^11.0.1",
+    "chai": "^5.1.1",
+    "mocha": "^10.7.3",
+    "selenium-webdriver": "^4.25.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  }
+}
