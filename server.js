@@ -68,7 +68,17 @@ const server = http.createServer((req, res) => {
   }
 });
 
-// Start de server
+// Start the server
 server.listen(port, hostname, () => {
-  console.log(`Server draait op http://${hostname}:${port}/`);
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
+
+process.on('SIGINT', () => {
+  console.log('Server is being stopped through SIGINT (Ctrl+C or test kill).');
+  process.exit();
+});
+
+process.on('SIGTERM', () => {
+  console.log('Server is being stopped through SIGTERM (kill-command or test shutdown).');
+  process.exit();
 });

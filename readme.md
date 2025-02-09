@@ -8,6 +8,11 @@ Install cucumber as a development dependency:
 > npm install --save-dev @cucumber/cucumber
 ```
 
+Note: Warns about dependencies. For details, use:
+```
+> npm outdated --depth=3
+```
+
 ## Create feature for Valet Parking
 features/Valet.feature:
 ```
@@ -199,7 +204,7 @@ features/step_definitions/steps.js:
 import { Given, When, Then, BeforeAll, AfterAll } from '@cucumber/cucumber';
 import { Builder, By, until } from 'selenium-webdriver';
 import assert from 'assert';
-import { exec } from 'child_process'; // Voor het starten van de server
+import { exec } from 'child_process'; // Used to start server
 import path from 'path';
 
 let driver;
@@ -211,16 +216,16 @@ const serverScript = path.join(process.cwd(), 'server.js');
 BeforeAll(async function () {
 serverProcess = exec(`node ${serverScript}`, (error, stdout, stderr) => {
     if (error) {
-    console.error(`Starting server failed: ${error.message}`);
-    return;
+        console.error(`Starting server failed: ${error.message}`);
+        return;
     }
     if (stderr) {
-    console.error(`Server error: ${stderr}`);
+        console.error(`Server error: ${stderr}`);
     }
     console.log(`Server started:\n${stdout}`);
 });
 
-// Wait 1 second to allow server toa start properly
+// Wait 1 second to allow server to start properly
 await new Promise(resolve => setTimeout(resolve, 1000));
 });
 
@@ -300,5 +305,30 @@ Set up a test script in package.json:
 
 Run test (with setup in package.json):
 ```
-> npm test
+$ npm test
 ```
+
+## Summary
+Install packages:
+```
+$ npm install --save-dev @cucumber/cucumber
+$ npm install --save-dev selenium-webdriver
+$ npm install --save-dev mocha chai
+```
+
+Run Cucumber:
+```
+> npx cucumber-js
+```
+
+Run unit test:
+```
+$ node node_modules/mocha/bin/mocha.js
+```
+
+Run Server:
+```
+$ node server.js
+```
+
+Access the server at http://127.0.0.1:3000/

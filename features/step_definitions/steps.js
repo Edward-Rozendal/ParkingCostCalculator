@@ -1,7 +1,7 @@
 import { Given, When, Then, BeforeAll, AfterAll } from '@cucumber/cucumber';
 import { Builder, By, until } from 'selenium-webdriver';
 import assert from 'assert';
-import { exec } from 'child_process'; // Voor het starten van de server
+import { exec } from 'child_process'; // Used to start server
 import path from 'path';
 
 let driver;
@@ -22,15 +22,20 @@ BeforeAll(async function () {
     console.log(`Server started:\n${stdout}`);
   });
 
-  // Wait 1 second to allow server toa start properly
+  // Wait 1 second to allow server to start properly
   await new Promise(resolve => setTimeout(resolve, 1000));
 });
 
 // Terminate server after completing the tests
 AfterAll(async function () {
   if (serverProcess) {
-    serverProcess.kill();
-    console.log('Server terminated.');
+    try {
+      process.kill(serverProcess.pid);
+    } catch (err) {
+      if (err.code !== 'ESRCH') {
+        console.error('Error on stopping server:', err.message);
+      }
+    }
   }
 });
 

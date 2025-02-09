@@ -1,10 +1,10 @@
 {
   "type": "module",
   "devDependencies": {
-    "@cucumber/cucumber": "^11.0.1",
-    "chai": "^5.1.1",
-    "mocha": "^10.7.3",
-    "selenium-webdriver": "^4.25.0"
+    "@cucumber/cucumber": "^11.2.0",
+    "chai": "^5.1.2",
+    "mocha": "^10.8.2",
+    "selenium-webdriver": "^4.28.1"
   },
   "scripts": {
     "test": "mocha"
